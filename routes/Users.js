@@ -30,11 +30,15 @@ users.post('/login', (req,res) => {
             const userData = {
                 authId: req.body.authId,
                 email: req.body.email,
+                name: req.body.name,
                 created: today,
             }
             User.create(userData)
             .then(user => {
-                res.json({status: 'Registered'});
+                let token = jwt.sign(user.dataValues, secret, {
+                    expiresIn: 1440
+                });
+                res.send(token);
             })
             .catch(err => {
                 res.send('error: ' + err);
