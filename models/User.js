@@ -17,6 +17,9 @@ module.exports = db.sequelize.define(
         },
         name: {
             type: Sequelize.STRING
+        },
+        hasStarted: {
+            type: Sequelize.BOOLEAN
         }
     },
     {

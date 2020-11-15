@@ -31,6 +31,7 @@ users.post('/login', (req,res) => {
                 authId: req.body.authId,
                 email: req.body.email,
                 name: req.body.name,
+                hasStarted: 0,
                 created: today,
             }
             User.create(userData)
