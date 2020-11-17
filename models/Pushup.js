@@ -2,27 +2,27 @@ const Sequelize = require('sequelize');
 const db = require('../database/db');
 
 module.exports = db.sequelize.define(
-    'user',
+    'pushup',
     {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: false
+            //this will be the id from user
         },
-        authId: {
+        date: {
             type: Sequelize.STRING
         },
-        email: {
-            type: Sequelize.STRING
+        set: {
+            type: Sequelize.INTEGER
+            //1-3
         },
-        name: {
-            type: Sequelize.STRING
+        total: {
+            type: Sequelize.INTEGER
         },
-        hasStarted: {
+        isDayFive: {
             type: Sequelize.BOOLEAN
         }
-        // nextUp
-        // options: pushup, maxEffort, pyramid, gripSwitch, maxDay, DayFive
     },
     {
         timestamps: false

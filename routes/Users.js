@@ -1,6 +1,7 @@
 const express = require('express');
 const users = express.Router();
 const cors = require('cors');
+const mysql = require('mysql');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
@@ -10,6 +11,18 @@ const User = require('../models/User');
 users.use(cors());
 
 const secret = process.env.SECRET;
+
+const pool = mysql.createPool({
+    connectionLimit: 10,
+    host: process.env.DBHOST,
+    user: process.env.DBUSER,
+    password: process.env.DBPASSWORD,
+    database: process.env.DB
+})
+
+function getConnection() {
+    return pool;
+}
 
 users.post('/login', (req,res) => {
     User.findOne({
@@ -46,6 +59,46 @@ users.post('/login', (req,res) => {
             })
         }
     })
+})
+
+users.post('/hasStarted', (req,res) => {
+    const authId = req.body.authId;
+    const connection = getConnection();
+    const queryString = 'SELECT hasStarted FROM users where authId = ?';
+
+    connection.query(queryString, [authId], (err, rows, fields) => {
+        if (!!err) {
+            console.log('failed to query for users: ' + err);
+            res.sendStatus(500);
+            return
+        }
+        res.json(rows);
+    });
+})
+
+users.post('/setUp', (req,res) => {
+    const authId = req.body.authId;
+    const connection = getConnection();
+    const queryString = 'UPDATE users SET hasStarted = 1 WHERE authId = ?';
+
+    connection.query(queryString, [authId], (err, rows, fields) => {
+        if (!!err) {
+            console.log('failed to query for users: ' + err);
+            res.sendStatus(500);
+            return
+        }
+        console.log('Got started!');
+        res.json(rows);
+    });
+
+    // now create a user column for each workout database
+    // Pushup
+    // Max effort
+    // Pyramid
+    // Grip switch
+    // Max Day
+    // add a isDayFive bool column for each workout, default to false
+
 })
 
 module.exports = users;
