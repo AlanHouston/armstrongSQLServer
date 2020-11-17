@@ -7,7 +7,7 @@ require('dotenv').config();
 
 const Workout = require('../models/Pushup');
 //add other workouts as built
-users.use(cors());
+workouts.use(cors());
 
 const secret = process.env.SECRET;
 
@@ -22,3 +22,9 @@ const pool = mysql.createPool({
 function getConnection() {
     return pool;
 }
+
+
+
+
+
+module.exports = workouts;
