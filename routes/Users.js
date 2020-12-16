@@ -91,13 +91,8 @@ users.post('/setUp', (req,res) => {
         res.json(rows);
     });
 
-    // now create a user column for each workout database
-    // Pushup
-    // Max effort
-    // Pyramid
-    // Grip switch
-    // Max Day
-    // add a isDayFive bool column for each workout, default to false
+    //ADD USER ROW to userWorkouts TABLE - will be a POST to a different pathname
+
 
 })
 

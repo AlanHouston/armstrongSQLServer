@@ -2,28 +2,24 @@ const Sequelize = require('sequelize');
 const db = require('../database/db');
 
 module.exports = db.sequelize.define(
-    'user',
+    'userWorkout',
     {
-        id: {
+        workoutId: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
         },
-        authId: {
+        userId: {
+            type: Sequelize.INTEGER
+        },
+        workout: {
             type: Sequelize.STRING
         },
-        email: {
-            type: Sequelize.STRING
-        },
-        name: {
-            type: Sequelize.STRING
-        },
-        hasStarted: {
-            type: Sequelize.BOOLEAN
-            //defaults to zero
-        },
-        created: {
+        date: {
             type: Sequelize.DATEONLY
+        },
+        isDayFive: {
+            type: Sequelize.BOOLEAN
         }
     },
     {

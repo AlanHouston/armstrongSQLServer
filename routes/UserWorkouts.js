@@ -2,12 +2,13 @@ const express = require('express');
 const users = express.Router();
 const cors = require('cors');
 const mysql = require('mysql');
+// const jwt = require('jsonwebtoken');
+// const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
 require('dotenv').config();
 
-const Workout = require('../models/Pushup');
-//add other workouts as built
-workouts.use(cors());
+const UserWorkout = require('../models/userWorkouts');
+userWorkouts.use(cors());
 
 const secret = process.env.SECRET;
 
@@ -23,7 +24,9 @@ function getConnection() {
     return pool;
 }
 
+userWorkouts.post('/userWorkout', (req,res) => {
 
+}
 
 
 

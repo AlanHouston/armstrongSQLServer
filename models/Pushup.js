@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../database/db');
 
+//NOPE
+
 module.exports = db.sequelize.define(
     'pushup',
     {
@@ -8,7 +10,6 @@ module.exports = db.sequelize.define(
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: false
-            //this will be the id from user
         },
         date: {
             type: Sequelize.STRING
